@@ -9,16 +9,16 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native';
-  
+
   const t = require('tcomb-form-native')
-  
+
   const Form = t.form.Form
-  
+
   const User = t.struct({
     email: t.String,
     password:  t.String
   })
-  
+
   const options = {
     fields: {
       email: {
@@ -32,9 +32,9 @@ import {
       }
     }
   }
-  
+
   class LoginView extends Component {
-  
+
     constructor(props) {
       super(props)
       this.state = {
@@ -44,7 +44,7 @@ import {
         }
       }
     }
-  
+
     componentWillUnmount() {
       this.setState = {
         value: {
@@ -53,7 +53,7 @@ import {
         }
       }
     }
-  
+
     _onChange = (value) => {
       this.setState({
         value
@@ -69,7 +69,7 @@ import {
         }
         // Serialize and post the data
         const json = JSON.stringify(data)
-        fetch('http://localhost:3000/users/login', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -85,11 +85,11 @@ import {
             AsyncStorage.setItem('jwt', res.token)
             alert(`Success! You may now access protected content.`)
             // Redirect to home screen
-            this.props.navigator.pop()
+            // this.props.navigator.pop()
           }
         })
-        .catch(() => {
-          alert('There was an error logging in.');
+        .catch((err) => {
+          alert('There was an error logging in.' + err);
         })
         .done()
       } else {
@@ -97,7 +97,7 @@ import {
         alert('Please fix the errors listed and try again.')
       }
     }
-  
+
     render() {
       return (
         <ScrollView style={styles.container}>
@@ -109,13 +109,13 @@ import {
             onChange={this._onChange}
           />
           <TouchableHighlight onPress={this._handleAdd}>
-            <Text style={[styles.button, styles.greenButton]}>Log In</Text>
+            <Text style={styles.button}>Log In</Text>
           </TouchableHighlight>
         </ScrollView>
       )
     }
   };
-  
+
   var styles = StyleSheet.create({
     container: {
       padding: 20,
@@ -127,15 +127,13 @@ import {
       padding: 20,
       textAlign: 'center',
       marginBottom: 20,
-      color: '#fff'
-    },
-    greenButton: {
-      backgroundColor: '#4CD964'
+      color: '#fff',
+      backgroundColor: '#1e698d'
     },
     centering: {
       alignItems: 'center',
       justifyContent: 'center'
     }
   })
-  
+
   module.exports = LoginView

@@ -5,16 +5,16 @@ import {
     TouchableHighlight,
     Text
   } from 'react-native'
-  
+
   const t = require('tcomb-form-native');
-  
+
   const Form = t.form.Form
-  
+
   const newUser = t.struct({
     email: t.String,
     password:  t.String
   })
-  
+
   const options = {
     fields: {
       email: {
@@ -28,9 +28,9 @@ import {
       }
     }
   }
-  
+
   class RegisterView extends Component {
-  
+
     constructor(props) {
       super(props)
       this.state = {
@@ -40,7 +40,7 @@ import {
         }
       }
     }
-  
+
     componentWillUnmount() {
       this.setState = {
         value: {
@@ -49,13 +49,13 @@ import {
         }
       }
     }
-  
+
     _onChange = (value) => {
       this.setState({
         value
       })
     }
-  
+
     _handleAdd = () => {
       const value = this.refs.form.getValue();
       // If the form is valid...
@@ -66,7 +66,7 @@ import {
         }
         // Serialize and post the data
         const params = JSON.stringify(data);
-        fetch('http://localhost:3000/users/register', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ import {
         alert('Please fix the errors listed and try again.')
       }
     }
-  
+
     render() {
       return (
         <ScrollView style={styles.container}>
@@ -102,13 +102,13 @@ import {
             onChange={this._onChange}
           />
           <TouchableHighlight onPress={this._handleAdd}>
-            <Text style={[styles.button, styles.greenButton]}>Create account</Text>
+            <Text style={styles.button}>Create account</Text>
           </TouchableHighlight>
         </ScrollView>
       )
     }
   }
-  
+
   const styles = StyleSheet.create({
     container: {
       padding: 20,
@@ -120,15 +120,13 @@ import {
       padding: 20,
       textAlign: 'center',
       marginBottom: 20,
-      color: '#fff'
-    },
-    greenButton: {
-      backgroundColor: '#4CD964'
+      color: '#fff',
+      backgroundColor: '#1e698d'
     },
     centering: {
       alignItems: 'center',
       justifyContent: 'center'
     }
   })
-  
+
   module.exports = RegisterView

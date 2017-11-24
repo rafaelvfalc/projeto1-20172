@@ -17,26 +17,28 @@ import {
 const LoginScreen = require('./views/LoginView')
 const RegisterScreen = require('./views/RegisterView')
 const ProtectedScreen = require('./views/ProtectedView')
+const HomeLogin = require('./views/HomeLogin')
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    padding: 80,
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#789fbb'
   },
   button: {
     borderRadius: 4,
     padding: 20,
     textAlign: 'center',
     marginBottom: 20,
-    color: '#fff'
+    color: '#fff',
+    marginLeft: 50,
+    marginRight: 50
   },
   greenButton: {
     backgroundColor: '#4CD964'
   },
   blueButton: {
-    backgroundColor: '#34AADC'
+    backgroundColor: '#1e698d'
   },
   redButton: {
     backgroundColor: '#FF3B30',
@@ -60,7 +62,10 @@ const HomeScreen = ({ navigation }) => (
         Log In
       </Text>
     </TouchableHighlight>
-    <TouchableHighlight onPress={() => alert('You have been logged out.')}>
+    <TouchableHighlight onPress={() => {
+      AsyncStorage.removeItem('jwt');
+      alert('You have been logged out.');
+    }}>
       <Text style={[styles.button, styles.blueButton]}>
         Log Out
       </Text>
@@ -68,6 +73,12 @@ const HomeScreen = ({ navigation }) => (
     <TouchableHighlight onPress={() => navigation.navigate('Protected')}>
       <Text style={[styles.button, styles.blueButton]}>
         Protected Content
+      </Text>
+    </TouchableHighlight>
+
+    <TouchableHighlight onPress={() => navigation.navigate('HomeLogin')}>
+      <Text style={[styles.button, styles.blueButton]}>
+        Login styled
       </Text>
     </TouchableHighlight>
   </View>
@@ -78,26 +89,20 @@ const App = StackNavigator({
     screen: HomeScreen,
     navigationOptions: {
       headerTitle: 'Buzz Ticket',
-    },
+    }
   },
   Login: {
-    screen: LoginScreen,
-    navigationOptions: {
-      headerTitle: 'Back',
-    },
+    screen: LoginScreen
   },
   Register: {
-    screen: RegisterScreen,
-    navigationOptions: {
-      headerTitle: 'Back',
-    },
+    screen: RegisterScreen
   },
   Protected: {
-    screen: ProtectedScreen,
-    navigationOptions: {
-      headerTitle: 'Back',
-    },
+    screen: ProtectedScreen
   },
+  HomeLogin: {
+    screen: HomeLogin
+  }
 });
 
 module.exports = App;

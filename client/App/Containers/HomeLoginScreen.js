@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 import {
   AppRegistry,
@@ -9,9 +9,11 @@ import {
   AsyncStorage,
   TouchableHighlight,
   Image
-} from 'react-native';
+} from 'react-native'
 
-class HomeLogin extends Component {
+import sryles from './Styles/HomeLoginScreenStyles'
+
+export default class HomeLoginScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -34,24 +36,3 @@ class HomeLogin extends Component {
     )
   }
 }
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      backgroundColor: '#789fbb'
-    },
-    title: {
-      color: '#fff',
-      fontSize: 50,
-      textAlign: 'center'
-    },
-    text: {
-      textAlign: 'center',
-      color: '#fff',
-      fontSize: 10
-    }
-  })
-
-
-module.exports = HomeLogin

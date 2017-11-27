@@ -9,9 +9,16 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
-var routes = require('./routes/index');
+
+var buses = require('./routes/buses');
+var index = require('./routes/index');
+var routes = require('./routes/routes');
+var trip_plans = require('./routes/trip_plans');
+var trips = require('./routes/trips');
 var users = require('./routes/users');
+
 var User = require('./models/user');
+
 var config = require('./config');
 
 var app = express();
@@ -56,9 +63,6 @@ passport.use('jwt', new JwtStrategy(options, function(jwt_payload, done) {
   })
 }))
 
-app.use('/', routes);
-app.use('/users', users);
-
 // connect to database
 var db = config.mongodb.url;
 mongoose.Promise = global.Promise;
@@ -66,6 +70,13 @@ mongoose.connect(db, {useMongoClient: true});
 mongoose.connection.on('error', function() {
     console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?')
 });
+
+app.use('/api/', index);
+app.use('/api/buses', buses);
+app.use('/api/users', users);
+app.use('/api/routes', routes);
+app.use('/api/trip_plans', trip_plans);
+app.use('/api/trips', trips);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -19,7 +19,7 @@ router.post('/login', function (req, res, next) {
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
     if (user) {
-      var token = jwt.sign({ id: user._id, email: user.email }, config.jwt.secret);
+      var token = jwt.sign({ id: user._id, email: user.username }, config.jwt.secret);
       return res
         .status(200)
         .json({ token });
@@ -28,7 +28,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res) {
-  User.register(new User({ email: req.body.email }), req.body.password, function (err, user) {
+  User.register(new User({ username: req.body.username }), req.body.password, function (err, user) {
     if (err) {
       return res.status(400).send({ error: 'Email address in use.' })
     }

@@ -9,7 +9,9 @@
 	"dependencies": {
 		"react": "16.0.0",
 		"react-native": "0.50.3",
+		"react-native-datepicker": "^1.6.0",
 		"react-native-deprecated-custom-components": "^0.1.1",
+		"react-native-search-box": "0.0.13",
 		"react-navigation": "^1.0.0-beta.19",
 		"tcomb-form-native": "^0.6.11"
 	},

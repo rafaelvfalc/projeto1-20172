@@ -11,13 +11,13 @@ import {
   const Form = t.form.Form
 
   const newUser = t.struct({
-    email: t.String,
+    username: t.String,
     password:  t.String
   })
 
   const options = {
     fields: {
-      email: {
+      username: {
         autoCapitalize: 'none',
         autoCorrect: false
       },
@@ -35,7 +35,7 @@ import {
       super(props)
       this.state = {
         value: {
-          email: '',
+          username: '',
           password: ''
         }
       }
@@ -44,7 +44,7 @@ import {
     componentWillUnmount() {
       this.setState = {
         value: {
-          email: '',
+          username: '',
           password: null
         }
       }
@@ -61,7 +61,7 @@ import {
       // If the form is valid...
       if (value) {
         const data = {
-          email: value.email,
+          username: value.username,
           password: value.password,
         }
         // Serialize and post the data

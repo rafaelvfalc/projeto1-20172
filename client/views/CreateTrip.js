@@ -76,59 +76,61 @@ import {
       })
     }
     _handleAdd = () => {
-      const value = this.refs.form.getValue();
-      // If the form is valid...
-      if (value) {
-        const data = {
-          _trip_plan: {
-            route: {
-              origin: value.origem,
-              destination: value.destination,
-              duration: value.duracao
+      AsyncStorage.getItem('jwt', (err, token) => {
+        const value = this.refs.form.getValue();
+        // If the form is valid...
+        if (value) {
+          const data = {
+            _trip_plan: {
+              route: {
+                origin: value.origem,
+                destination: value.destination,
+                duration: value.duracao
+              },
+              bus: {
+                model: value.modeloOnibus,
+                seat_map: value.mapa,
+                seats: [value.cadeiras]
+              },
+              day: value.dia,
+              hour: value.hora,
+              weekly: value.semanal,
+              holiday: value.feriado,
+              enabled: value.ativado
             },
-            bus: {
-              model: value.modeloOnibus,
-              seat_map: value.mapa,
-              seats: [value.cadeiras]
-            },
-            day: value.dia,
-            hour: value.hora,
-            weekly: value.semanal,
-            holiday: value.feriado,
-            enabled: value.ativado
-          },
-          date: new Date()
-        }
-        // Serialize and post the data
-        alert(data)
-        const json = JSON.stringify(data)
-        fetch('http://aqueous-oasis-59499.herokuapp.com/api/trips', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          body: json
-        })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.error) {
-            alert(res.error)
-          } else {
-            AsyncStorage.setItem('jwt', res.token)
-            alert(`Success! The trip was created.`)
-            // Redirect to home screen
-            // this.props.navigator.pop()
+            date: new Date()
           }
-        })
-        .catch((err) => {
-          alert('There was an error creating a trip' + err);
-        })
-        .done()
-      } else {
-        // Form validation error
-        alert('Please fix the errors listed and try again.')
-      }
+          // Serialize and post the data
+          alert(data)
+          const json = JSON.stringify(data)
+          fetch('http://aqueous-oasis-59499.herokuapp.com/api/trip_plans', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              Authorization: `JWT ${token}`
+            },
+            body: json
+          })
+          .then((response) => response.json())
+          .then((res) => {
+            if (res.error) {
+              alert(res.error)
+            } else {
+              AsyncStorage.setItem('jwt', res.token)
+              alert(`Success! The trip was created.`)
+              // Redirect to home screen
+              // this.props.navigator.pop()
+            }
+          })
+          .catch((err) => {
+            alert('There was an error creating a trip' + err);
+          })
+          .done()
+        } else {
+          // Form validation error
+          alert('Please fix the errors listed and try again.')
+        }
+      })
     }
 
     render() {

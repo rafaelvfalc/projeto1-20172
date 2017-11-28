@@ -64,12 +64,12 @@ import {
       // If the form is valid...
       if (value) {
         const data = {
-          username: value.email,
+          username: value.username,
           password: value.password
         }
         // Serialize and post the data
         const json = JSON.stringify(data)
-        fetch('http://aqueous-oasis-59499.herokuapp.com/users/login', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/api/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -102,7 +102,7 @@ import {
         // Serialize and post the data
         alert(data)
         const json = JSON.stringify(data)
-        fetch('http://aqueous-oasis-59499.herokuapp.com/trips', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/api/trips', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

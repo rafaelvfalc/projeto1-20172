@@ -66,7 +66,7 @@ import {
         }
         // Serialize and post the data
         const params = JSON.stringify(data);
-        fetch('http://aqueous-oasis-59499.herokuapp.com/users/register', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

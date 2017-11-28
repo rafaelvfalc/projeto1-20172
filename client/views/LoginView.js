@@ -15,13 +15,13 @@ import {
   const Form = t.form.Form
 
   const User = t.struct({
-    email: t.String,
+    username: t.String,
     password:  t.String
   })
 
   const options = {
     fields: {
-      email: {
+      username: {
         autoCapitalize: 'none',
         autoCorrect: false
       },
@@ -40,7 +40,7 @@ import {
       this.state = {
         value: {
           email: '',
-          password: ''
+          username: ''
         }
       }
     }
@@ -49,7 +49,7 @@ import {
       this.setState = {
         value: {
           email: '',
-          password: null
+          username: null
         }
       }
     }

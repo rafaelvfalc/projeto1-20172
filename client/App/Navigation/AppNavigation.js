@@ -4,6 +4,7 @@ import LoginScreen from '../Containers/LoginScreen'
 import RegisterScreen from '../Containers/RegisterScreen'
 import ProtectedScreen from '../Containers/ProtectedScreen'
 import HomeLoginScreen from '../Containers/HomeLoginScreen'
+import CreateTripScreen from '../Containers/CreateTripScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -14,6 +15,7 @@ const PrimaryNav = StackNavigator({
   RegisterScreen: { screen: RegisterScreen },
   ProtectedScreen: { screen: ProtectedScreen },
   HomeLoginScreen: { screen: HomeLoginScreen },
+  CreateTripScreen: { screen: CreateTripScreen },
 }, {
   // Default config for all screens
   headerMode: 'none',

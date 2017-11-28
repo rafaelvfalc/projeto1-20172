@@ -26,7 +26,7 @@ export default class ProtectedScreen extends Component {
 
   _fetchData = () => {
     AsyncStorage.getItem('jwt', (err, token) => {
-      fetch('http://aqueous-oasis-59499.herokuapp.com/protected', {
+      fetch('http://aqueous-oasis-59499.herokuapp.com/api/protected', {
         method: 'GET',
         headers: {
           Accept: 'application/json',

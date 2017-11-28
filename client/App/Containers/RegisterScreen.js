@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   ScrollView,
   StyleSheet,
@@ -6,20 +7,22 @@ import {
   Text
 } from 'react-native'
 
+import { register } from '../Redux/AuthRedux'
+
 import styles from './Styles/RegisterScreenStyles'
 
-const t = require('tcomb-form-native');
+const t = require('tcomb-form-native')
 
 const Form = t.form.Form
 
 const newUser = t.struct({
-  email: t.String,
+  username: t.String,
   password:  t.String
 })
 
 const options = {
   fields: {
-    email: {
+    username: {
       autoCapitalize: 'none',
       autoCorrect: false
     },
@@ -31,22 +34,13 @@ const options = {
   }
 }
 
-export default class RegisterScreen extends Component {
+class RegisterScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
       value: {
-        email: '',
+        username: '',
         password: ''
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState = {
-      value: {
-        email: '',
-        password: null
       }
     }
   }
@@ -61,34 +55,7 @@ export default class RegisterScreen extends Component {
     const value = this.refs.form.getValue();
     // If the form is valid...
     if (value) {
-      const data = {
-        email: value.email,
-        password: value.password,
-      }
-      // Serialize and post the data
-      const params = JSON.stringify(data);
-      fetch('http://aqueous-oasis-59499.herokuapp.com/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: params
-      })
-      .then((response) => {
-      })
-      .then(() => {
-        alert('Success! You may now log in.');
-        // Redirect to home screen
-        // TO DO
-      })
-      .catch((error) => {
-        alert('There was an error creating your account.');
-      })
-      .done()
-    } else {
-      // Form validation error
-      alert('Please fix the errors listed and try again.')
+      this.props.register(value.username, value.password)
     }
   }
 
@@ -109,3 +76,15 @@ export default class RegisterScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  loadingAuth: state.auth.loadingAuth,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    register: (usernae, password) => dispatch(register(username, password))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen)

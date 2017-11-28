@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import { login } from '../Redux/AuthRedux'
+
 import styles from './Styles/LoginScreenStyles'
 
 const t = require('tcomb-form-native')
@@ -17,13 +20,13 @@ const t = require('tcomb-form-native')
 const Form = t.form.Form
 
 const User = t.struct({
-  email: t.String,
+  username: t.String,
   password:  t.String
 })
 
 const options = {
   fields: {
-    email: {
+    username: {
       autoCapitalize: 'none',
       autoCorrect: false
     },
@@ -35,22 +38,13 @@ const options = {
   }
 }
 
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
       value: {
-        email: '',
-        password: ''
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState = {
-      value: {
-        email: '',
-        password: null
+        username: '',
+        username: ''
       }
     }
   }
@@ -60,43 +54,12 @@ export default class LoginScreen extends Component {
       value
     })
   }
-
   _handleAdd = () => {
     const value = this.refs.form.getValue();
     // If the form is valid...
     if (value) {
-      const data = {
-        username: value.email,
-        password: value.password
-      }
       // Serialize and post the data
-      const json = JSON.stringify(data)
-      fetch('http://aqueous-oasis-59499.herokuapp.com/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: json
-      })
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.error) {
-          alert(res.error)
-        } else {
-          AsyncStorage.setItem('jwt', res.token)
-          alert(`Success! You may now access protected content.`)
-          // Redirect to home screen
-          // this.props.navigator.pop()
-        }
-      })
-      .catch((err) => {
-        alert('There was an error logging in.' + err);
-      })
-      .done()
-    } else {
-      // Form validation error
-      alert('Please fix the errors listed and try again.')
+      this.props.login(value.username, value.password)
     }
   }
 
@@ -117,3 +80,15 @@ export default class LoginScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  loadingAuth: state.auth.loadingAuth,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (username, password) => dispatch(login(username, password)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

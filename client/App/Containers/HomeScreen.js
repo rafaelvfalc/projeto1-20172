@@ -32,6 +32,11 @@ export default class HomeScreen extends Component {
             Log Out
           </Text>
         </TouchableHighlight>
+        <TouchableHighlight onPress={() => navigation.navigate('CreateTripScreen')}>
+          <Text style={[styles.button, styles.blueButton]}>
+            CreateTripS
+          </Text>
+        </TouchableHighlight>
         <TouchableHighlight onPress={() => navigation.navigate('ProtectedScreen')}>
           <Text style={[styles.button, styles.blueButton]}>
             Protected Content

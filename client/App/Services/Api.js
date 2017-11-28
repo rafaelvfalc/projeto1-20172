@@ -1,8 +1,22 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
 
+const getHeaders = (token) => {
+  let headers = {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    Accept: 'application/json',
+  }
+  if (!token) {
+    return headers
+  }
+
+  headers[Authorization] = `JWT ${token}`
+  return headers
+}
+
 // our "constructor"
-const create = (baseURL = 'https://api.github.com/') => {
+const create = (token, baseURL = 'http://aqueous-oasis-59499.herokuapp.com/api') => {
   // ------
   // STEP 1
   // ------
@@ -13,9 +27,7 @@ const create = (baseURL = 'https://api.github.com/') => {
     // base URL is read from the "constructor"
     baseURL,
     // here are some default headers
-    headers: {
-      'Cache-Control': 'no-cache'
-    },
+    headers: getHeaders(token),
     // 10 second timeout...
     timeout: 10000
   })
@@ -35,8 +47,17 @@ const create = (baseURL = 'https://api.github.com/') => {
   // way at this level.
   //
   const getRoot = () => api.get('')
-  const getRate = () => api.get('rate_limit')
-  const getUser = (username) => api.get('search/users', {q: username})
+  const getProtected = () => api.get('/protected')
+
+  const registerUser = (username, password) => api.post('/users/register', {
+    username,
+    password,
+  })
+
+  const loginUser = (username, password) => api.post('/users/login', {
+    username,
+    password,
+  })
 
   // ------
   // STEP 3
@@ -53,12 +74,11 @@ const create = (baseURL = 'https://api.github.com/') => {
   return {
     // a list of the API functions from step 2
     getRoot,
-    getRate,
-    getUser
+    getProtected,
+    registerUser,
+    loginUser,
   }
 }
 
 // let's return back our create method as the default.
-export default {
-  create
-}
+export default create

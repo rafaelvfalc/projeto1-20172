@@ -14,33 +14,39 @@ import {
 
   const Form = t.form.Form
 
-  const User = t.struct({
-    email: t.String,
-    password:  t.String
+  const TripPlan = t.struct({
+    origem: t.String,
+    destino: t.String,
+    duracao: t.Number,
+    modeloOnibus: t.String,
+    mapa: t.String,
+    cadeiras: t.String,
+    onibus: t.String,
+    dia: t.Number,
+    hora: t.String,
+    semanal: t.Boolean,
+    feriado: t.Boolean,
+    ativado: t.Boolean
   })
 
-  const options = {
-    fields: {
-      email: {
-        autoCapitalize: 'none',
-        autoCorrect: false
-      },
-      password: {
-        autoCapitalize: 'none',
-        password: true,
-        autoCorrect: false
-      }
-    }
-  }
-
-  class LoginView extends Component {
+  class CreateTrip extends Component {
 
     constructor(props) {
       super(props)
       this.state = {
         value: {
-          email: '',
-          password: ''
+          origem: '',
+          destino: '',
+          duracao: 0,
+          modeloOnibus: '',
+          mapa: '',
+          cadeiras: '',
+          onibus: '',
+          dia: 0,
+          hora: '',
+          semanal: true,
+          feriado: false,
+          ativado: true
         }
       }
     }
@@ -48,8 +54,18 @@ import {
     componentWillUnmount() {
       this.setState = {
         value: {
-          email: '',
-          password: null
+          origem: '',
+          destino: '',
+          duracao: 0,
+          modeloOnibus: '',
+          mapa: '',
+          cadeiras: '',
+          onibus: '',
+          dia: 0,
+          hora: '',
+          semanal: true,
+          feriado: false,
+          ativado: true
         }
       }
     }
@@ -64,12 +80,29 @@ import {
       // If the form is valid...
       if (value) {
         const data = {
-          username: value.username,
-          password: value.password
+          _trip_plan: {
+            route: {
+              origin: value.origem,
+              destination: value.destination,
+              duration: value.duracao
+            },
+            bus: {
+              model: value.modeloOnibus,
+              seat_map: value.mapa,
+              seats: [value.cadeiras]
+            },
+            day: value.dia,
+            hour: value.hora,
+            weekly: value.semanal,
+            holiday: value.feriado,
+            enabled: value.ativado
+          },
+          date: new Date()
         }
         // Serialize and post the data
+        alert(data)
         const json = JSON.stringify(data)
-        fetch('http://aqueous-oasis-59499.herokuapp.com/api/users/login', {
+        fetch('http://aqueous-oasis-59499.herokuapp.com/api/trips', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -83,13 +116,13 @@ import {
             alert(res.error)
           } else {
             AsyncStorage.setItem('jwt', res.token)
-            alert(`Success! You may now access protected content.`)
+            alert(`Success! The trip was created.`)
             // Redirect to home screen
             // this.props.navigator.pop()
           }
         })
         .catch((err) => {
-          alert('There was an error logging in.' + err);
+          alert('There was an error creating a trip' + err);
         })
         .done()
       } else {
@@ -103,13 +136,12 @@ import {
         <ScrollView style={styles.container}>
           <Form
             ref='form'
-            options={options}
-            type={User}
+            type={TripPlan}
             value={this.state.value}
             onChange={this._onChange}
           />
           <TouchableHighlight onPress={this._handleAdd}>
-            <Text style={styles.button}>Log In</Text>
+            <Text style={styles.button}>Criar</Text>
           </TouchableHighlight>
         </ScrollView>
       )
@@ -136,4 +168,4 @@ import {
     }
   })
 
-  module.exports = LoginView
+  module.exports = CreateTrip

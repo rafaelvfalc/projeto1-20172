@@ -18,6 +18,7 @@ const LoginScreen = require('./views/LoginView')
 const RegisterScreen = require('./views/RegisterView')
 const ProtectedScreen = require('./views/ProtectedView')
 const HomeLogin = require('./views/HomeLogin')
+const CreateTrip = require('./views/CreateTrip')
 
 const styles = StyleSheet.create({
   container: {
@@ -76,6 +77,12 @@ const HomeScreen = ({ navigation }) => (
       </Text>
     </TouchableHighlight>
 
+    <TouchableHighlight onPress={() => navigation.navigate('CreateTrip')}>
+      <Text style={[styles.button, styles.blueButton]}>
+        CreateTripS
+      </Text>
+    </TouchableHighlight>
+
     <TouchableHighlight onPress={() => navigation.navigate('HomeLogin')}>
       <Text style={[styles.button, styles.blueButton]}>
         Login styled
@@ -99,6 +106,9 @@ const App = StackNavigator({
   },
   Protected: {
     screen: ProtectedScreen
+  },
+  CreateTrip: {
+    screen: CreateTrip
   },
   HomeLogin: {
     screen: HomeLogin

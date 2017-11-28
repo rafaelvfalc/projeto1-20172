@@ -21,7 +21,7 @@ const ProtectedScreen = require('./views/ProtectedView')
 const HomeLogin = require('./views/HomeLogin')
 const CreateTrip = require('./views/CreateTrip')
 const SearchTravelScreen = require('./views/SearchTravelView')
-
+const ShowTripScreen =  require('./views/TripsView')
 const ShowTravelsScreen = require('./views/ShowTravelsView')
 
 const styles = StyleSheet.create({
@@ -99,6 +99,12 @@ const HomeScreen = ({ navigation }) => (
         </Text>
       </TouchableHighlight>
 
+      <TouchableHighlight onPress={() => navigation.navigate('TripsView')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Trips
+        </Text>
+      </TouchableHighlight>
+
     </ScrollView>
 );
 
@@ -129,6 +135,9 @@ const App = StackNavigator({
   },
   ShowTravels: {
     screen: ShowTravelsScreen
+  },
+  TripsView: {
+    screen: ShowTripScreen
   }
 });
 

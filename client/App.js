@@ -22,6 +22,8 @@ const HomeLogin = require('./views/HomeLogin')
 const CreateTrip = require('./views/CreateTrip')
 const SearchTravelScreen = require('./views/SearchTravelView')
 
+const ShowTravelsScreen = require('./views/ShowTravelsView')
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -124,6 +126,9 @@ const App = StackNavigator({
   },
   SearchTravel: {
     screen: SearchTravelScreen
+  },
+  ShowTravels: {
+    screen: ShowTravelsScreen
   }
 });
 

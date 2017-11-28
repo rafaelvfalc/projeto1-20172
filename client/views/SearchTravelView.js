@@ -8,34 +8,31 @@ import {
   AppRegistry, 
   Text, 
   TextInput, 
-  View,
-  TouchableHighligh 
+  View
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker'
 
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+const ShowTravelsScreen = require('./ShowTravelsView')
+
+const SearchScreen = StackNavigator({
+  ShowTravels: { screen: ShowTravelsScreen }
+});
+
 class SearchTravelView extends Component {
   constructor(props) {
     super(props)
-    this.from = {text: ''};
-    this.to = {text: ''};
-    this.depart= {date:"2017-09-27"}
-    this.return= {date:"2017-12-25"}
-  }
-
-  _searchTravel = () => {
-    alert('Searching Travel...')
-  }
-
-  setDepart = (newDate) => {
-    this.depart = {date: newDate}
-  }
-
-  setReturn = (newDate) => {
-    this.return = {date: newDate}
+    var _from = "";
+    var _to = "";
+    this.state = {depart:{date: "2016-07-24"}, return: {date: "2016-12-25"}};
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{padding: 10}}>
         <Text style={{fontSize:20}}>
@@ -44,19 +41,19 @@ class SearchTravelView extends Component {
       <TextInput
           style={{height: 40}}
           placeholder="From"
-          onChangeText={(from) => this.setState({text})}
+          onChangeText={(text) => this._from = text}
         />
       <TextInput
           style={{height: 40}}
           placeholder="To"
-          onChangeText={(to) => this.setState({text})}
+          onChangeText={(text) => this._to = text}
         />
       <Text style={{fontSize:15}}>
         Depart:
        </Text>
        <DatePicker
         style={{width: 150}}
-        date={this.depart.date}
+        date={this.state.depart.date}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
@@ -75,14 +72,14 @@ class SearchTravelView extends Component {
             marginLeft: 36
           }
         }}
-        onDateChange={(date) => {this.setDepart({date: date})}}
+        onDateChange={(date) => {this.setState({depart:{date: date}, return: {date: this.state.return.date}})}}
       />
       <Text style={{fontSize:15}}>
         Return:
        </Text>
        <DatePicker
         style={{width: 150}}
-        date={this.return.date}
+        date={this.state.return.date}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
@@ -101,42 +98,25 @@ class SearchTravelView extends Component {
             marginLeft: 36
           }
         }}
-        onDateChange={(date) => {this.setReturn({date: date})}}
+        onDateChange={(date) => {this.setState({depart:{date: this.state.depart.date}, return: {date: date}})}}
       />
-      <TouchableHighlight onPress={this._searchTravel}>
-        <Text style={styles.button}>Search</Text>
-      </TouchableHighlight>
+
+      <Button
+        style={{marginTop: 20,}}
+        title="Show Travels"
+        onPress={() =>
+          navigate('ShowTravels',{ _from: this._from, _to: this._to, _depart: this.state.depart.date, _return: this.state.return.date })
+        }
+      />
       </View>
     )
   }
 }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      backgroundColor: '#789fbb'
-    },
-    title: {
-      color: '#fff',
-      fontSize: 50,
-      textAlign: 'center'
-    },
-    text: {
-      textAlign: 'center',
-      color: '#fff',
-      fontSize: 10
-    },
-    button: {
-      borderRadius: 4,
-      padding: 20,
-      textAlign: 'center',
-      marginTop: 20,
-      marginBottom: 20,
-      color: '#fff',
-      backgroundColor: '#1e698d'
-    }
-  })
-
+const SearchTravel = StackNavigator({
+  ShowTravels: {
+    screen: ShowTravelsScreen
+  }
+});
 
 module.exports = SearchTravelView

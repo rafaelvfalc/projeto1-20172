@@ -3,7 +3,8 @@ import {
     ScrollView,
     StyleSheet,
     TouchableHighlight,
-    Text
+    Text,
+    Image
   } from 'react-native'
 
   const t = require('tcomb-form-native');
@@ -12,12 +13,17 @@ import {
 
   const newUser = t.struct({
     username: t.String,
+    email: t.String,
     password:  t.String
   })
 
   const options = {
     fields: {
-      username: {
+      username:{
+        autoCapitalize: 'none',
+        autoCorrect: false
+      },
+      email: {
         autoCapitalize: 'none',
         autoCorrect: false
       },
@@ -36,6 +42,7 @@ import {
       this.state = {
         value: {
           username: '',
+          email: '',
           password: ''
         }
       }
@@ -45,6 +52,7 @@ import {
       this.setState = {
         value: {
           username: '',
+          email: '',
           password: null
         }
       }
@@ -94,6 +102,12 @@ import {
     render() {
       return (
         <ScrollView style={styles.container}>
+
+           <Image
+              style={styles.logo}
+              source={require('./img/logo.png')}
+            />
+
           <Form
             ref='form'
             type={newUser}
@@ -104,6 +118,9 @@ import {
           <TouchableHighlight onPress={this._handleAdd}>
             <Text style={styles.button}>Create account</Text>
           </TouchableHighlight>
+           <Text style={styles.subtitle}>Already have an account? <Text style={{textDecorationLine: 'underline'}}>
+          Sign in.
+        </Text> </Text>
         </ScrollView>
       )
     }
@@ -111,14 +128,23 @@ import {
 
   const styles = StyleSheet.create({
     container: {
+      backgroundColor: '#789fbb',
       padding: 20,
       flex: 1,
       flexDirection: 'column'
     },
+    subtitle:{
+      marginTop: 10,
+      color: '#fff',
+      textAlign: 'center',
+      fontSize: 13
+    },
     button: {
-      borderRadius: 4,
+      fontSize: 14,
+      borderRadius: 3,
       padding: 20,
       textAlign: 'center',
+      marginTop: 12,
       marginBottom: 20,
       color: '#fff',
       backgroundColor: '#1e698d'
@@ -126,6 +152,10 @@ import {
     centering: {
       alignItems: 'center',
       justifyContent: 'center'
+    },
+    logo: {
+      marginTop:10,
+      marginBottom:20
     }
   })
 

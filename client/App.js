@@ -7,6 +7,7 @@ import {
   View,
   Button,
   AsyncStorage,
+  ScrollView,
   TouchableHighlight
 } from 'react-native';
 
@@ -19,6 +20,9 @@ const RegisterScreen = require('./views/RegisterView')
 const ProtectedScreen = require('./views/ProtectedView')
 const HomeLogin = require('./views/HomeLogin')
 const CreateTrip = require('./views/CreateTrip')
+const SearchTravelScreen = require('./views/SearchTravelView')
+const ShowTripScreen =  require('./views/TripsView')
+const ShowTravelsScreen = require('./views/ShowTravelsView')
 
 const styles = StyleSheet.create({
   container: {
@@ -52,30 +56,30 @@ const styles = StyleSheet.create({
 })
 
 const HomeScreen = ({ navigation }) => (
-  <View style={styles.container}>
-    <TouchableHighlight onPress={() => navigation.navigate('Register')}>
-      <Text style={[styles.button, styles.blueButton]}>
-        Register
-      </Text>
-    </TouchableHighlight>
-    <TouchableHighlight onPress={() => navigation.navigate('Login')}>
-      <Text style={[styles.button, styles.blueButton]}>
-        Log In
-      </Text>
-    </TouchableHighlight>
-    <TouchableHighlight onPress={() => {
-      AsyncStorage.removeItem('jwt');
-      alert('You have been logged out.');
-    }}>
-      <Text style={[styles.button, styles.blueButton]}>
-        Log Out
-      </Text>
-    </TouchableHighlight>
-    <TouchableHighlight onPress={() => navigation.navigate('Protected')}>
-      <Text style={[styles.button, styles.blueButton]}>
-        Protected Content
-      </Text>
-    </TouchableHighlight>
+    <ScrollView style={styles.container}>
+      <TouchableHighlight onPress={() => navigation.navigate('Register')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Register
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => navigation.navigate('Login')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Log In
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => {
+        AsyncStorage.removeItem('jwt');
+        alert('You have been logged out.');
+      }}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Log Out
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => navigation.navigate('Protected')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Protected Content
+        </Text>
+      </TouchableHighlight>
 
     <TouchableHighlight onPress={() => navigation.navigate('CreateTrip')}>
       <Text style={[styles.button, styles.blueButton]}>
@@ -83,12 +87,25 @@ const HomeScreen = ({ navigation }) => (
       </Text>
     </TouchableHighlight>
 
-    <TouchableHighlight onPress={() => navigation.navigate('HomeLogin')}>
-      <Text style={[styles.button, styles.blueButton]}>
-        Login styled
-      </Text>
-    </TouchableHighlight>
-  </View>
+      <TouchableHighlight onPress={() => navigation.navigate('HomeLogin')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Login styled
+        </Text>
+      </TouchableHighlight>
+
+      <TouchableHighlight onPress={() => navigation.navigate('SearchTravel')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Search Travel
+        </Text>
+      </TouchableHighlight>
+
+      <TouchableHighlight onPress={() => navigation.navigate('TripsView')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Trips
+        </Text>
+      </TouchableHighlight>
+
+    </ScrollView>
 );
 
 const App = StackNavigator({
@@ -112,6 +129,15 @@ const App = StackNavigator({
   },
   HomeLogin: {
     screen: HomeLogin
+  },
+  SearchTravel: {
+    screen: SearchTravelScreen
+  },
+  ShowTravels: {
+    screen: ShowTravelsScreen
+  },
+  TripsView: {
+    screen: ShowTripScreen
   }
 });
 

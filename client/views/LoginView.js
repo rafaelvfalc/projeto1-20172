@@ -100,7 +100,14 @@ import {
 
     render() {
       return (
+
         <ScrollView style={styles.container}>
+        
+            <Image
+              style={styles.logo}
+              source={require('./img/logo.png')}
+            />
+         
           <Form
             ref='form'
             options={options}
@@ -111,6 +118,9 @@ import {
           <TouchableHighlight onPress={this._handleAdd}>
             <Text style={styles.button}>Log In</Text>
           </TouchableHighlight>
+          <Text style={styles.subtitle}>Dont have an account? <Text style={{textDecorationLine: 'underline'}}>
+          Sign up.
+        </Text> </Text>
         </ScrollView>
       )
     }
@@ -118,14 +128,23 @@ import {
 
   var styles = StyleSheet.create({
     container: {
+      backgroundColor: '#789fbb',
       padding: 20,
       flex: 1,
       flexDirection: 'column'
     },
+    subtitle:{
+      marginTop: 15,
+      color: '#fff',
+      textAlign: 'center',
+      fontSize: 13
+    },
     button: {
-      borderRadius: 4,
+      fontSize: 18,
+      borderRadius: 3,
       padding: 20,
       textAlign: 'center',
+      marginTop: 30,
       marginBottom: 20,
       color: '#fff',
       backgroundColor: '#1e698d'
@@ -133,6 +152,10 @@ import {
     centering: {
       alignItems: 'center',
       justifyContent: 'center'
+    },
+    logo: {
+      marginTop:30,
+      marginBottom:50
     }
   })
 

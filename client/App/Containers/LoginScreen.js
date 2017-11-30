@@ -66,6 +66,10 @@ class LoginScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../Images/logo.png')}
+        />
         <Form
           ref='form'
           options={options}
@@ -76,6 +80,9 @@ class LoginScreen extends Component {
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={styles.button}>Log In</Text>
         </TouchableHighlight>
+        <Text style={styles.subtitle}>Dont have an account? <Text style={{textDecorationLine: 'underline'}}>
+          Sign up.
+        </Text> </Text>
       </ScrollView>
     )
   }

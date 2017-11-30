@@ -59,6 +59,11 @@ const create = (token, baseURL = 'http://aqueous-oasis-59499.herokuapp.com/api')
     password,
   })
 
+  const createTrip = (tripPlan, date) => api.post('/trip_plans', {
+    _trip_plan: tripPlan,
+    date,
+  })
+
   // ------
   // STEP 3
   // ------
@@ -77,6 +82,7 @@ const create = (token, baseURL = 'http://aqueous-oasis-59499.herokuapp.com/api')
     getProtected,
     registerUser,
     loginUser,
+    createTrip,
   }
 }
 

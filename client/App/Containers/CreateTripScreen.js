@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   AppRegistry,
   StyleSheet,
@@ -9,6 +10,8 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native'
+
+import { createTrip } from '../Redux/TripRedux'
 
 const t = require('tcomb-form-native')
 
@@ -57,61 +60,24 @@ class CreateTripScreen extends Component {
     })
   }
   _handleAdd = () => {
-    AsyncStorage.getItem('jwt', (err, token) => {
-      const value = this.refs.form.getValue();
-      // If the form is valid...
-      if (value) {
-        const data = {
-          _trip_plan: {
-            route: {
-              origin: value.origem,
-              destination: value.destination,
-              duration: value.duracao
-            },
-            bus: {
-              model: value.modeloOnibus,
-              seat_map: value.mapa,
-              seats: [value.cadeiras]
-            },
-            day: value.dia,
-            hour: value.hora,
-            weekly: value.semanal,
-            holiday: value.feriado,
-            enabled: value.ativado
-          },
-          date: new Date()
-        }
-        // Serialize and post the data
-        alert(data)
-        const json = JSON.stringify(data)
-        fetch('http://aqueous-oasis-59499.herokuapp.com/api/trip_plans', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `JWT ${token}`
-          },
-          body: json
-        })
-        .then((response) => response.json())
-        .then((res) => {
-          if (res.error) {
-            alert(res.error)
-          } else {
-            AsyncStorage.setItem('jwt', res.token)
-            alert(`Success! The trip was created.`)
-            // Redirect to home screen
-            // this.props.navigator.pop()
-          }
-        })
-        .catch((err) => {
-          alert('There was an error creating a trip' + err);
-        })
-        .done()
-      } else {
-        // Form validation error
-        alert('Please fix the errors listed and try again.')
-      }
-    })
+    const tripPlan = {
+      route: {
+        origin: value.origem,
+        destination: value.destination,
+        duration: value.duracao
+      },
+      bus: {
+        model: value.modeloOnibus,
+        seat_map: value.mapa,
+        seats: [value.cadeiras]
+      },
+      day: value.dia,
+      hour: value.hora,
+      weekly: value.semanal,
+      holiday: value.feriado,
+      enabled: value.ativado
+    }
+    this.props.createTrip(tripPlan)
   }
 
   render() {
@@ -131,4 +97,12 @@ class CreateTripScreen extends Component {
   }
 }
 
-export default CreateTripScreen;
+const mapStateToProps = (state) => ({
+  loading: state.trip.loading,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  createTrip: (tripPlan) => dispatch(createTrip(tripPlan))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTripScreen);

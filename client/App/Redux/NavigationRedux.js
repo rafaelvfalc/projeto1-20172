@@ -6,6 +6,7 @@ const { Types, Creators } = createActions({
   goRegisterScreen: null,
   goLoginScreen: null,
   goProtectedScreen: null,
+  goCreateTripScreen: null,
 });
 
 export const NavTypes = Types
@@ -28,6 +29,12 @@ export const reducer = (state, action) => {
     case Types.GO_PROTECTED_SCREEN: {
       return AppNavigation.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'ProtectedScreen' }),
+        state
+      )
+    }
+    case Types.GO_CREATE_TRIP_SCREEN: {
+      return AppNavigation.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'CreateTripScreen' }),
         state
       )
     }

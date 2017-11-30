@@ -4,7 +4,8 @@ import configureStore from './CreateStore'
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
-  auth: require('./AuthRedux').reducer
+  auth: require('./AuthRedux').reducer,
+  trip: require('./TripRedux').reducer
 })
 
 export default () => {

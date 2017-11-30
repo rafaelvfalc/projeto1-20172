@@ -4,7 +4,8 @@ import {
   ScrollView,
   StyleSheet,
   TouchableHighlight,
-  Text
+  Text,
+  Image
 } from 'react-native'
 
 import { register } from '../Redux/AuthRedux'
@@ -62,6 +63,10 @@ class RegisterScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../Images/logo.png')}
+        />
         <Form
           ref='form'
           type={newUser}
@@ -72,6 +77,9 @@ class RegisterScreen extends Component {
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={styles.button}>Create account</Text>
         </TouchableHighlight>
+         <Text style={styles.subtitle}>Already have an account? <Text style={{textDecorationLine: 'underline'}}>
+          Sign in.
+        </Text> </Text>
       </ScrollView>
     )
   }
@@ -83,7 +91,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: (usernae, password) => dispatch(register(username, password))
+    register: (username, password) => dispatch(register(username, password))
   }
 }
 

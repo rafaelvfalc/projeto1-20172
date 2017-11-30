@@ -46,7 +46,7 @@ const registerSuccess = (state = INITIAL_STATE, action) => {
   return state.merge({ loadingAuth: false })
 }
 
-const registerError = (state = INITIAL_STATE, action) => {
+const registerFail = (state = INITIAL_STATE, action) => {
   return state.merge({ loadingAuth: false })
 }
 

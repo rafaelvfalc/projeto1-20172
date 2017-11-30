@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 import {
   StyleSheet,
@@ -10,25 +10,27 @@ import {
   TextInput,
   View,
   Image
-} from 'react-native';
+} from 'react-native'
 
 import DatePicker from 'react-native-datepicker'
 
 import {
   StackNavigator,
-} from 'react-navigation';
+} from 'react-navigation'
 
-const ShowTravelsScreen = require('./ShowTravelsView')
+import styles from './Styles/SearchTravelScreenStyles'
+
+import ShowTravelsScreen from './ShowTravelScreen'
 
 const SearchScreen = StackNavigator({
   ShowTravels: { screen: ShowTravelsScreen }
 });
 
-class SearchTravelView extends Component {
+export default class SearchTravelScreen extends Component {
   constructor(props) {
     super(props)
-    var _from = "";
-    var _to = "";
+    const _from = "";
+    const _to = "";
     this.state = {depart:{date: "2016-07-24"}, return: {date: "2016-12-25"}};
   }
 
@@ -56,7 +58,7 @@ class SearchTravelView extends Component {
              </Text>
              <DatePicker
               style={{width: 150, marginLeft:15}}
-              date={this.depart.date}
+              date={this.state.depart.date}
               mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
@@ -84,7 +86,7 @@ class SearchTravelView extends Component {
              </Text>
              <DatePicker
               style={{width: 150, marginLeft:15}}
-              date={this.return.date}
+              date={this.state.return.date}
               mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
@@ -117,59 +119,3 @@ class SearchTravelView extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#c2d5db'
-  },
-  toptitle:{
-    textAlign: 'center',
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingTop: 25,
-    paddingBottom: 25,
-    marginBottom: 25,
-    backgroundColor: '#789fbb'
-  },
-  title: {
-    color: '#fff',
-    fontSize: 50,
-    textAlign: 'center'
-  },
-  row:{
-    flexDirection: 'row'
-  },
-  input:{
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 20,
-    marginRight: 20, 
-    paddingLeft: 10,
-    paddingTop: 10,
-    paddingRight: 10,
-    borderRadius: 3,
-    borderWidth: 2,
-    borderColor: '#131925'
-  },
-  text: {
-    textAlign: 'center',
-    color: '#fff',
-    fontSize: 10
-  },
-  button: {
-    marginLeft: 25,
-    marginRight: 25,
-    marginTop: 40,
-    borderRadius: 3,
-    padding: 20,
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#1e698d'
-  }
-})
-
-
-module.exports = SearchTravelView

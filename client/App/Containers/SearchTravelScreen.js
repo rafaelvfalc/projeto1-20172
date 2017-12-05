@@ -20,7 +20,6 @@
 
   import styles from './Styles/SearchTravelScreenStyles'
 
-  import ShowTravelsScreen from './ShowTravelScreen'
   import TripScreen from './TripScreen'
 
   const SearchScreen = StackNavigator({
@@ -32,7 +31,7 @@
       super(props)
       var _from = "";
       var _to = "";
-      this.state = {depart:{date: "2016-07-24"}, return: {date: "2016-12-25"}};
+      this.state = {depart:{date: "2017-12-01"}, return: {date: "2017-12-02"}};
     }
 
     _searchTravel = () => {

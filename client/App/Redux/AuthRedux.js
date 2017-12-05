@@ -78,17 +78,20 @@ export const register = (username, password) => (dispatch) => {
   dispatch({ type: Types.REGISTER_REQUEST })
   return api
     .registerUser(username, password)
-    .then(respone => {
+    .then(response => {
       if (response.ok) {
         alert('Success! You may now log in.')
         dispatch(NavCreators.goRegisterScreen())
         return dispatch(Creators.registerSuccess())
       } else {
-        alert('There was an error creating your account.')
+        alert(response.data.error)
         return dispatch(Creators.registerFail())
       }
     })
-    .catch(error => dispatch(Creators.registerFail()))
+    .catch(error => {
+      alert('There was an error creating your account.')
+      dispatch(Creators.registerFail())
+    })
 }
 
 /* ---- Hookup Reducers to Types ---- */

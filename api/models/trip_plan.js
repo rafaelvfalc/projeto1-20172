@@ -25,4 +25,18 @@ var TripPlanSchema = new Schema({
     }
 });
 
+var TripPlan = module.exports = mongoose.model('TripPlan', TripPlanSchema);
+
+// Cria um trip plan e salva no bd a entrada é um objeto trip plan e a função callback
+module.exports.createTripPlan = function(newTripPlan, callback){
+          newTripPlan.save(callback);
+}
+// Acha um trip plan passando o id da rota e a função callback
+module.exports.getTripPlanByRoute = function(route_id, callback){
+  var query = {route: route_id};
+  TripPlan.find(query, callback);
+
+}
+
+
 module.exports = mongoose.model('TripPlan', TripPlanSchema);

@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 
 import { createTrip } from '../Redux/TripRedux'
+import style from './Styles/CreateTripScreenStyles'
 
 const t = require('tcomb-form-native')
 
@@ -60,6 +61,7 @@ class CreateTripScreen extends Component {
     })
   }
   _handleAdd = () => {
+    const value = this.refs.form.getValue();
     const tripPlan = {
       route: {
         origin: value.origem,
@@ -82,7 +84,7 @@ class CreateTripScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={style.container}>
         <Form
           ref='form'
           type={TripPlan}
@@ -90,7 +92,7 @@ class CreateTripScreen extends Component {
           onChange={this._onChange}
         />
         <TouchableHighlight onPress={this._handleAdd}>
-          <Text style={styles.button}>Criar</Text>
+          <Text style={style.button}>Criar</Text>
         </TouchableHighlight>
       </ScrollView>
     )

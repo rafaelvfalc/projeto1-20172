@@ -33,6 +33,7 @@ exports.create_trip_plan = function (req, res, next) {
       }
     })(req, res, next);
 }
+/* Funções que usam o modelo fragmentado do bd reescrever se for utilizar esse modelo 
 
 simple_search = function (req, res, next, query) {
   passport.authenticate('jwt', function (err, user, info) {
@@ -100,7 +101,7 @@ exports.find_by_route_all_holiday = function(req, res, next, route_ids){
   var query = {route: { $in: route_ids}, holiday: true};
   simple_search(req, res, next, query);
 }
-
+*/
 exports.list_all_trip_plans = function (req, res, next) {
   passport.authenticate('jwt', function (err, user, info) {
     if (err) {

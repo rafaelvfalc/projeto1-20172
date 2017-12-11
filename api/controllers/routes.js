@@ -24,6 +24,7 @@ exports.create_route = function (req, res, next) {
       }
     })(req, res, next);
 }
+/* antigas funções | se for manter a arquitetura alterar 
 
 simple_search = function (req, res, next, query) {
     passport.authenticate('jwt', function (err, user, info) {
@@ -57,7 +58,7 @@ exports.search_by_origin_destination = function(req, res, next, orgn, dest){
   var query = {origin: orgn, destination: dest};
   simple_search(req, res, next, query);
 }
-
+*/
 exports.list_all_routes = function (req, res, next) {
     passport.authenticate('jwt', function (err, user, info) {
       if (err) {

@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/trips')
-var controllerR = require('../controllers/routes')
-var controllerP = require('../controllers/trip_plans')
-
 
 
 

@@ -40,21 +40,13 @@ exports.create_trip = function (req, res, next) {
 
 // pesquisa base p/ n repetir código 
 simple_search = function(req, res, next, query){
-  passport.authenticate('jwt', function (err, user, info) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials.' });
-    }
-    if (user) {
-      Trip.find(query, function(err, trips) {
-        if (err)
-          res.send(err);
+  Trip.find(query, function(err, trips) {
+    if (err)
+        res.send(err);
         res.json(trips);
       });
-    }
-  })(req, res, next);
+    
+  (req, res, next);
 }
 }
 
@@ -128,20 +120,12 @@ exports.search_by_alldays_origin_dest = function(req, res, next){
 
 // listar todos
 exports.list_all_trips = function (req, res, next) {
-  passport.authenticate('jwt', function (err, user, info) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials.' });
-    }
-    if (user) {
       Trip.find({}, function(err, trips) {
         if (err)
           res.send(err);
         res.json(trips);
       });
     }
-  })(req, res, next);
+  (req, res, next);
 }
 

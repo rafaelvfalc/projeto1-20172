@@ -85,12 +85,16 @@ class CreateTripScreen extends Component {
   render() {
     return (
       <ScrollView style={style.container}>
+       <Text style={style.toptitle}>
+        Create Trip
+       </Text>
+       <View style={style.block}>
         <Form
           ref='form'
           type={TripPlan}
           value={this.state.value}
           onChange={this._onChange}
-        />
+        /></View>
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={style.button}>Criar</Text>
         </TouchableHighlight>

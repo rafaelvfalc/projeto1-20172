@@ -2,9 +2,22 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    padding: 20,
+    backgroundColor: '#c2d5db',
     flex: 1,
     flexDirection: 'column'
+  },
+  toptitle:{
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 25,
+    paddingBottom: 25,
+    marginBottom: 25,
+    backgroundColor: '#789fbb'
+  },
+  block: {
+    padding: 20
   },
   button: {
     borderRadius: 4,

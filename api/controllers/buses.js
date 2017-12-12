@@ -45,7 +45,7 @@ exports.list_all_buses = function (req, res, next) {
   })(req, res, next);
 }
 
-simple_search = function (req, res, next, query) {
+var simple_search = function (req, res, next, query) {
   passport.authenticate('jwt', function (err, user, info) {
     if (err) {
       return next(err);

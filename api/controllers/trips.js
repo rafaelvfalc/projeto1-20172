@@ -39,16 +39,15 @@ exports.create_trip = function (req, res, next) {
 }
 
 // pesquisa base p/ n repetir código 
-simple_search = function(req, res, next, query){
+var simple_search = function(req, res, next, query){
   Trip.find(query, function(err, trips) {
-    if (err)
+      if (err)
         res.send(err);
         res.json(trips);
-      });
-    
+      });    
   (req, res, next);
 }
-}
+
 
 // Inicio das funções de pesquisa
 
@@ -120,12 +119,11 @@ exports.search_by_alldays_origin_dest = function(req, res, next){
 
 // listar todos
 exports.list_all_trips = function (req, res, next) {
-      Trip.find({}, function(err, trips) {
-        if (err)
-          res.send(err);
+    Trip.find({}, function(err, trips) {
+      if (err)
+        res.send(err);
         res.json(trips);
-      });
-    }
+      });    
   (req, res, next);
 }
 

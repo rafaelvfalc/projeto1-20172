@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable'
+import { AsyncStorage } from 'react-native'
 import { createReducer, createActions } from 'reduxsauce'
 
 import CreateApi from '../Services/Api'
@@ -61,9 +62,9 @@ export const login = (username, password) => (dispatch) => {
     .then(response => {
       if (response.ok) {
         alert(`Success! You may now access protected content.`)
-        dispatch(NavCreators.goProtectedScreen())
         AsyncStorage.setItem('jwt', response.data.token)
-        return dispatch(Creators.loginSuccess(response.data.token))
+        dispatch(Creators.loginSuccess(response.data.token))
+        return dispatch(NavCreators.goProtectedScreen())
       } else {
         alert('There was an error logging in.')
         return dispatch(Creators.loginFail())

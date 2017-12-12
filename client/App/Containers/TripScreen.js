@@ -1,45 +1,63 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  RefreshControl,
-  ActivityIndicator
-} from 'react-native';
+import React, { Component } from "react";
+import { FlatList, StyleSheet, Text, View, RefreshControl, ActivityIndicator } from "react-native";
 
 import Timeline from 'react-native-timeline-listview'
 
 import styles from './Styles/TripScreenStyles'
 
 export default class TripScreen extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
-    this.data = [
-      {time: '09:00', title: 'Campina Grande - João Pessoa', description: 'Viagem com duração de 1h40min, modelo do Ônibus: x, com 45 vagas disponíveis.'},
-      {time: '10:30', title: 'Campina Grande - Sumé', description: 'Viagem com duração de 2h, modelo do Ônibus: z, com 40 vagas disponíveis.'},
-      {time: '12:00', title: 'João Pessoa - Campina Grande', description: 'Viagem com duração de 1h40min, modelo do Ônibus: y, com 30 vagas disponíveis.'},
-      {time: '14:00', title: 'João Pessoa - Recife', description: 'Viagem com duração de 2h10min, modelo do Ônibus: y, com 45 vagas disponíveis.'},
-      {time: '16:30', title: 'Campina Grande - Monteiro', description: 'Viagem com duração de 2h40min, modelo do Ônibus: x, com 25 vagas disponíveis.'},
-    ]
+    this.from = this.props.navigation.state.params._from;
+    this.to = this.props.navigation.state.params._to;
+    this.depart = this.props.navigation.state.params._depart;
+    this.return = this.props.navigation.state.params._return;
+    //alert(this.props.navigation.state.params._to)
+    //alert(this.props.navigation.state.params._depart)
+    //alert(this.props.navigation.state.params._return)
 
+    this.data = []
+
+    this.tst = []
+    
     this.state = {
       isRefreshing: false,
       waiting: false,
       data: this.data
     }
+
   }
 
-  onRefresh = () => {
-    this.setState({isRefreshing: true});
-    //refresh to initial data
-    setTimeout(() => {
-      //refresh to initial data
-      this.setState({
-        data: this.data,
-        isRefreshing: false
+  componentWillMount() {
+    this.fetchData();
+  }
+
+  fetchData(){
+    fetch("https://my.api.mockaroo.com/travel.json?key=8ee6d780")
+    .then((response) => response.json())
+    .then((responseData) => {
+      var from = this.from
+      var to = this.to
+      var depart_date = this.depart
+      var return_date = this.return
+      var trips = []
+      responseData.forEach(function(trip) { 
+       if (trip.origem == from && trip.destino == to && trip.dia == depart_date) {
+        trips.push({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString() + " h , ônibus da " + trip.onibus + " modelo " + trip.modeloOnibus + ", com " + trip.cadeiras + " vagas disponíveis."})
+          //alert(JSON.stringify({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString()}))
+          //data.push({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString()})
+        }
       });
-    }, 2000);
+      this.data = trips
+      this.setState((state) => ({ data: trips}));      
+      //this.setState({
+      //  dataSource: this.state.dataSource.cloneWithRows(responseData.results),
+      //  loaded: true,
+      //});
+    })
+    .done();
+
   }
 
   onEndReached = () => {
@@ -48,13 +66,7 @@ export default class TripScreen extends Component {
       //fetch and concat data
       setTimeout(() => {
         //refresh to initial data
-        var data = this.state.data.concat([
-          {time: '18:00', title: 'Load more data', description: 'append event at bottom of timeline'},
-          {time: '18:00', title: 'Load more data', description: 'append event at bottom of timeline'},
-          {time: '18:00', title: 'Load more data', description: 'append event at bottom of timeline'},
-          {time: '18:00', title: 'Load more data', description: 'append event at bottom of timeline'},
-          {time: '18:00', title: 'Load more data', description: 'append event at bottom of timeline'}
-        ])
+        var data = this.state.data.concat([])
 
         this.setState({
           waiting: false,
@@ -68,36 +80,35 @@ export default class TripScreen extends Component {
     if (this.state.waiting) {
       return <ActivityIndicator />;
     } else {
-      return <Text>~</Text>;
-    }
-  }
+     return <Text>~</Text>;
+   }
+ }
 
-  render() {
-    //'rgb(45,156,219)'
-    return (
-      <View style={styles.container}>
-        <Timeline
-          style={styles.list}
-          data={this.state.data}
-          circleSize={20}
-          circleColor='white'
-          lineColor='white'
-          timeContainerStyle={{minWidth:52, marginTop: -5}}
-          timeStyle={{textAlign: 'center', backgroundColor:'#1e698d', color:'white', padding:5, borderRadius:13}}
-          descriptionStyle={{color:'black'}}
-          options={{
-            style:{paddingTop:5},
-            refreshControl: (
-              <RefreshControl
-                refreshing={this.state.isRefreshing}
-                onRefresh={this.onRefresh}
-              />
-            ),
-            renderFooter: this.renderFooter,
-            onEndReached: this.onEndReached
-          }}
-        />
-      </View>
-    );
-  }
+ render() {
+  //'rgb(45,156,219)'
+  return (
+  <View style={styles.container}>
+  <Timeline
+  style={styles.list}
+  data={this.state.data}
+  circleSize={20}
+  circleColor='white'
+  lineColor='white'
+  timeContainerStyle={{minWidth:52, marginTop: -5}}
+  timeStyle={{textAlign: 'center', backgroundColor:'#1e698d', color:'white', padding:5, borderRadius:13}}
+  descriptionStyle={{color:'black'}}
+  options={{
+    style:{paddingTop:5},
+    refreshControl: (
+    <RefreshControl
+    refreshing={this.state.isRefreshing}
+    onRefresh={this.onRefresh}
+    />
+    ),
+    renderFooter: this.renderFooter,
+  }}
+  />
+  </View>
+  );
+}
 }

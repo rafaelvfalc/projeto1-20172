@@ -61,7 +61,7 @@ export const login = (username, password) => (dispatch) => {
     .loginUser(username, password)
     .then(response => {
       if (response.ok) {
-        alert(`Success! You may now access protected content.`)
+        //alert(`Success! You may now access protected content.`)
         AsyncStorage.setItem('jwt', response.data.token)
         dispatch(Creators.loginSuccess(response.data.token))
         return dispatch(NavCreators.goProtectedScreen())

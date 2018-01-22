@@ -8,6 +8,10 @@ import {
   Image
 } from 'react-native'
 
+import {
+    StackNavigator,
+  } from 'react-navigation'
+
 import { register } from '../Redux/AuthRedux'
 
 import styles from './Styles/RegisterScreenStyles'
@@ -61,6 +65,7 @@ class RegisterScreen extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <ScrollView style={styles.container}>
         <Image
@@ -77,7 +82,7 @@ class RegisterScreen extends Component {
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={styles.button}>Create account</Text>
         </TouchableHighlight>
-         <Text style={styles.subtitle}>Already have an account? <Text style={{textDecorationLine: 'underline'}}>
+         <Text style={styles.subtitle}>Already have an account? <Text style={{textDecorationLine: 'underline'}} onPress={() => navigate('LoginScreen',{})}>
           Sign in.
         </Text> </Text>
       </ScrollView>

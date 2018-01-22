@@ -11,6 +11,10 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import {
+    StackNavigator,
+  } from 'react-navigation'
+
 import { login } from '../Redux/AuthRedux'
 
 import styles from './Styles/LoginScreenStyles'
@@ -44,7 +48,7 @@ class LoginScreen extends Component {
     this.state = {
       value: {
         username: '',
-        username: ''
+        password: ''
       }
     }
   }
@@ -64,6 +68,7 @@ class LoginScreen extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <ScrollView style={styles.container}>
         <Image
@@ -77,12 +82,12 @@ class LoginScreen extends Component {
           value={this.state.value}
           onChange={this._onChange}
         />
+        <Text style={styles.subtitle}>Dont have an account? <Text style={{textDecorationLine: 'underline'}} onPress={() => navigate('RegisterScreen',{})}>
+          Sign up.
+        </Text> </Text>
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={styles.button}>Log In</Text>
         </TouchableHighlight>
-        <Text style={styles.subtitle}>Dont have an account? <Text style={{textDecorationLine: 'underline'}}>
-          Sign up.
-        </Text> </Text>
       </ScrollView>
     )
   }

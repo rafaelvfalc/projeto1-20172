@@ -22,7 +22,7 @@ class ProtectedScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.centering}>
-          {isAuthenticated ? this._renderSecret() : <Text>You are not authorized!</Text>}
+          {isAuthenticated ? this._renderSecret() : <Text>Error during the authentication of the user, please try again.</Text>}
         </Text>
       </View>
     )

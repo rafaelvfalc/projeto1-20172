@@ -16,6 +16,10 @@ import style from './Styles/CreateTripScreenStyles'
 
 const t = require('tcomb-form-native')
 
+type Props = {
+  navigation: Object,
+}
+
 const Form = t.form.Form
 
 const TripPlan = t.struct({
@@ -34,6 +38,8 @@ const TripPlan = t.struct({
 })
 
 class CreateTripScreen extends Component {
+
+  props: Props;
 
   constructor(props) {
     super(props)
@@ -83,6 +89,7 @@ class CreateTripScreen extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <ScrollView style={style.container}>
        <Text style={style.toptitle}>
@@ -97,6 +104,9 @@ class CreateTripScreen extends Component {
         /></View>
         <TouchableHighlight onPress={this._handleAdd}>
           <Text style={style.button}>Criar</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => navigation.navigate('ProtectedScreen')}>
+          <Text style={style.button}>Voltar ao menu principal</Text>
         </TouchableHighlight>
       </ScrollView>
     )

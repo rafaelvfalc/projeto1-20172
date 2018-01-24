@@ -5,26 +5,54 @@ import {
   AsyncStorage,
   StyleSheet,
   Text,
+  ScrollView,
+  TouchableHighlight,
   View
 } from 'react-native'
 
 import styles from './Styles/ProtectedScreenStyles'
 
+type Props = {
+  navigation: Object,
+}
+
 class ProtectedScreen extends Component {
-  _renderSecret = () => (
-    <Text style={{fontSize:50}}>
-      Desculpa pela cerveja!
-    </Text>
-  )
+
+  props: Props;
+  _renderSecret () {
+    const { navigation } = this.props;
+    return (
+      <View>
+      <Text style={styles.toptitle}>Menu Principal</Text>
+      <TouchableHighlight onPress={() => navigation.navigate('CreateTripScreen')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          CreateTripS
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => navigation.navigate('SearchTravelScreen')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Search Travel
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => {
+        AsyncStorage.removeItem('jwt');
+        alert('You have been logged out.');
+          navigation.navigate('LoginScreen');
+        }}>
+        <Text style={[styles.button, styles.blueButton]}>
+          Log Out
+        </Text>
+      </TouchableHighlight>
+      </View>
+    )
+  }
 
   render() {
     const isAuthenticated = this.props.token && this.props.token !== ''
     return (
-      <View style={styles.container}>
-        <Text style={styles.centering}>
-          {isAuthenticated ? this._renderSecret() : <Text>Error during the authentication of the user, please try again.</Text>}
-        </Text>
-      </View>
+      <ScrollView style={styles.container}>
+        {isAuthenticated ? this._renderSecret() : <Text>Error during the authentication of the user, please try again.</Text>}
+      </ScrollView>
     )
   }
 }

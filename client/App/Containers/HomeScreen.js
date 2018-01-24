@@ -61,7 +61,6 @@ export default class HomeScreen extends Component {
             Trips
           </Text>
         </TouchableHighlight>
-
       </ScrollView>
     )
   }

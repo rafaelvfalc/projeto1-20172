@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, RefreshControl, ActivityIndicator } from "react-native";
+import { FlatList, StyleSheet, Text, View, RefreshControl, ActivityIndicator, Button } from "react-native";
 
 import Timeline from 'react-native-timeline-listview'
 
 import styles from './Styles/TripScreenStyles'
 
+type Props = {
+  navigation: Object,
+}
+
 export default class TripScreen extends Component {
+  props: Props;
   constructor(props){
     super(props)
 
@@ -85,6 +90,7 @@ export default class TripScreen extends Component {
  }
 
  render() {
+  const { navigation } = this.props;
   //'rgb(45,156,219)'
   return (
   <View style={styles.container}>
@@ -107,6 +113,13 @@ export default class TripScreen extends Component {
     ),
     renderFooter: this.renderFooter,
   }}
+  />
+  <Button
+    style={{marginTop: 20,}}
+    title="Pesquisar outra viagem"
+    onPress={() =>
+      navigation.navigate('SearchTravelScreen',{})
+    }
   />
   </View>
   );

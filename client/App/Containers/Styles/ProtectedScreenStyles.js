@@ -21,5 +21,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     color: '#fff'
+  },
+   toptitle:{
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: 25,
+    paddingBottom: 25,
+    marginBottom: 25,
+    backgroundColor: '#789fbb'
   }
 })

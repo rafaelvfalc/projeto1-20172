@@ -117,9 +117,17 @@
 
         <Button
         style={{marginTop: 20,}}
-        title="Show Travels"
+        title="Pesquisar viagem"
         onPress={() =>
           navigate('TripScreen',{ _from: this._from, _to: this._to, _depart: this.state.depart.date, _return: this.state.return.date })
+       }
+       />
+
+        <Button
+        style={{marginTop: 20,}}
+        title="Voltar ao menu principal"
+        onPress={() =>
+          navigate('ProtectedScreen',{})
        }
        />
 

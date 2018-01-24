@@ -11,7 +11,7 @@ import {
   Image
 } from 'react-native'
 
-import sryles from './Styles/HomeLoginScreenStyles'
+import styles from './Styles/HomeLoginScreenStyles'
 
 export default class HomeLoginScreen extends Component {
   constructor(props) {

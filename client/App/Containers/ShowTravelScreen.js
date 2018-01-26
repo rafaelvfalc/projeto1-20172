@@ -25,9 +25,6 @@ export default class ShowTravelScreen extends Component {
     };
   }
 
-// https://my.api.mockaroo.com/users.json?key=ff8bc390 -> url do mock JSON
-// http://www.mockaroo.com/virtual_services/922 -> info
-
   _getTravelsFromApi = (props) => {
     return fetch('https://my.api.mockaroo.com/users.json?key=8ee6d780')
     .then((response) => response.json())
@@ -39,9 +36,6 @@ export default class ShowTravelScreen extends Component {
       console.error(error);
     });
   }
-  //_test = () => {
-  //  alert(this.props.navigation.state.params._from)
-  //}
 
   render() {
     return (

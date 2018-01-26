@@ -18,14 +18,9 @@ export default class TripScreen extends Component {
     this.to = this.props.navigation.state.params._to;
     this.depart = this.props.navigation.state.params._depart;
     this.return = this.props.navigation.state.params._return;
-    //alert(this.props.navigation.state.params._to)
-    //alert(this.props.navigation.state.params._depart)
-    //alert(this.props.navigation.state.params._return)
 
     this.data = []
 
-    this.tst = []
-    
     this.state = {
       isRefreshing: false,
       waiting: false,
@@ -50,16 +45,10 @@ export default class TripScreen extends Component {
       responseData.forEach(function(trip) { 
        if (trip.origem == from && trip.destino == to && trip.dia == depart_date) {
         trips.push({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString() + " h , ônibus da " + trip.onibus + " modelo " + trip.modeloOnibus + ", com " + trip.cadeiras + " vagas disponíveis."})
-          //alert(JSON.stringify({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString()}))
-          //data.push({time:trip.hora.toString(), title:trip.origem.toString() + " - " + trip.destino.toString(), description: "Viagem de duração de " + trip.duracao.toString()})
         }
       });
       this.data = trips
       this.setState((state) => ({ data: trips}));      
-      //this.setState({
-      //  dataSource: this.state.dataSource.cloneWithRows(responseData.results),
-      //  loaded: true,
-      //});
     })
     .done();
 
@@ -68,9 +57,7 @@ export default class TripScreen extends Component {
   onEndReached = () => {
     if (!this.state.waiting) {
       this.setState({waiting: true});
-      //fetch and concat data
       setTimeout(() => {
-        //refresh to initial data
         var data = this.state.data.concat([])
 
         this.setState({
@@ -96,6 +83,9 @@ export default class TripScreen extends Component {
   <View style={styles.container}>
   <Timeline
   style={styles.list}
+  onEventPress={() =>
+    navigation.navigate('TripInfoScreen',{})
+  }
   data={this.state.data}
   circleSize={20}
   circleColor='white'

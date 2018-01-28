@@ -59,4 +59,4 @@ api/.env
 
 api/config.js
 
-ios/Pods
+client/ios/Pods

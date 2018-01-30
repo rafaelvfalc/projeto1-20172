@@ -26,12 +26,12 @@ class ProtectedScreen extends Component {
       <Text style={styles.toptitle}>Menu Principal</Text>
       <TouchableHighlight onPress={() => navigation.navigate('CreateTripScreen')}>
         <Text style={[styles.button, styles.blueButton]}>
-          CreateTripS
+          Create new Trip
         </Text>
       </TouchableHighlight>
-      <TouchableHighlight onPress={() => navigation.navigate('SearchTravelScreen')}>
+      <TouchableHighlight onPress={() => navigation.navigate('SearchTripScreen')}>
         <Text style={[styles.button, styles.blueButton]}>
-          Search Travel
+          Search Trip
         </Text>
       </TouchableHighlight>
       <TouchableHighlight onPress={() => {

@@ -103,10 +103,10 @@ class CreateTripScreen extends Component {
           onChange={this._onChange}
         /></View>
         <TouchableHighlight onPress={this._handleAdd}>
-          <Text style={style.button}>Criar</Text>
+          <Text style={style.button}>Create Trip</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => navigation.navigate('ProtectedScreen')}>
-          <Text style={style.button}>Voltar ao menu principal</Text>
+          <Text style={style.button}>Back to Main Menu</Text>
         </TouchableHighlight>
       </ScrollView>
     )

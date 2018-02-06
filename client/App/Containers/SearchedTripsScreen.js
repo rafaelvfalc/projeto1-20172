@@ -51,7 +51,6 @@ export default class SearchedTripsScreen extends Component {
       this.setState((state) => ({ data: trips}));      
     })
     .done();
-
   }
 
   onEndReached = () => {
@@ -81,6 +80,7 @@ export default class SearchedTripsScreen extends Component {
   //'rgb(45,156,219)'
   return (
   <View style={styles.container}>
+  <Text style={styles.toptitle}>Search Results</Text>
   <Timeline
   style={styles.list}
   onEventPress={() =>
@@ -90,7 +90,7 @@ export default class SearchedTripsScreen extends Component {
   circleSize={20}
   circleColor='white'
   lineColor='white'
-  timeContainerStyle={{minWidth:52, marginTop: -5}}
+  timeContainerStyle={{minWidth:52, marginTop: -10}}
   timeStyle={{textAlign: 'center', backgroundColor:'#1e698d', color:'white', padding:5, borderRadius:13}}
   descriptionStyle={{color:'black'}}
   options={{

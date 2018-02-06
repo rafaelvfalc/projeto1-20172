@@ -6,6 +6,7 @@ import CreateTripScreen from '../Containers/CreateTripScreen'
 import SearchedTripsScreen from '../Containers/SearchedTripsScreen'
 import SearchTripScreen from '../Containers/SearchTripScreen'
 import TripScreen from '../Containers/TripScreen'
+import UserProfileScreen from '../Containers/UserProfileScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -17,7 +18,8 @@ const PrimaryNav = StackNavigator({
   CreateTripScreen: { screen: CreateTripScreen },
   SearchedTripsScreen: { screen: SearchedTripsScreen },
   SearchTripScreen: { screen: SearchTripScreen },
-  TripScreen: { screen: TripScreen }
+  TripScreen: { screen: TripScreen },
+  UserProfileScreen: { screen: UserProfileScreen }
 }, {
   // Default config for all screens
   headerMode: 'none',

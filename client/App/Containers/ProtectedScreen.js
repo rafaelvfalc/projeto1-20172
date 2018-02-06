@@ -22,19 +22,27 @@ class ProtectedScreen extends Component {
   _renderSecret () {
     const { navigation } = this.props;
     return (
-      <View>
-      <Text style={styles.toptitle}>Menu Principal</Text>
-      <TouchableHighlight onPress={() => navigation.navigate('CreateTripScreen')}>
+      <View style={{padding: 10}}>
+      <Text style={styles.toptitle}>Main Menu</Text>
+      <TouchableHighlight style={{marginTop: 10,}}
+       onPress={() => navigation.navigate('CreateTripScreen')}>
         <Text style={[styles.button, styles.blueButton]}>
           Create new Trip
         </Text>
       </TouchableHighlight>
-      <TouchableHighlight onPress={() => navigation.navigate('SearchTripScreen')}>
+      <TouchableHighlight style={{marginTop: 10,}}
+       onPress={() => navigation.navigate('SearchTripScreen')}>
         <Text style={[styles.button, styles.blueButton]}>
           Search Trip
         </Text>
       </TouchableHighlight>
-      <TouchableHighlight onPress={() => {
+      <TouchableHighlight style={{marginTop: 10,}}
+       onPress={() => navigation.navigate('UserProfileScreen')}>
+        <Text style={[styles.button, styles.blueButton]}>
+          User Profile
+        </Text>
+      </TouchableHighlight>
+      <TouchableHighlight style={{marginTop: 10,}} onPress={() => {
         AsyncStorage.removeItem('jwt');
         alert('You have been logged out.');
           navigation.navigate('LoginScreen');

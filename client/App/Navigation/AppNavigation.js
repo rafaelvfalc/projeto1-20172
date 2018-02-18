@@ -1,31 +1,29 @@
 import { StackNavigator } from 'react-navigation'
-import HomeScreen from '../Containers/HomeScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import RegisterScreen from '../Containers/RegisterScreen'
 import ProtectedScreen from '../Containers/ProtectedScreen'
-import HomeLoginScreen from '../Containers/HomeLoginScreen'
 import CreateTripScreen from '../Containers/CreateTripScreen'
-import SearchTravelScreen from '../Containers/SearchTravelScreen'
+import SearchedTripsScreen from '../Containers/SearchedTripsScreen'
+import SearchTripScreen from '../Containers/SearchTripScreen'
 import TripScreen from '../Containers/TripScreen'
-import ShowTravelScreen from '../Containers/ShowTravelScreen'
+import UserProfileScreen from '../Containers/UserProfileScreen'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  HomeScreen: { screen: HomeScreen },
   LoginScreen: { screen: LoginScreen },
   RegisterScreen: { screen: RegisterScreen },
   ProtectedScreen: { screen: ProtectedScreen },
-  HomeLoginScreen: { screen: HomeLoginScreen },
   CreateTripScreen: { screen: CreateTripScreen },
-  SearchTravelScreen: { screen: SearchTravelScreen },
+  SearchedTripsScreen: { screen: SearchedTripsScreen },
+  SearchTripScreen: { screen: SearchTripScreen },
   TripScreen: { screen: TripScreen },
-  ShowTravelScreen: { screen: ShowTravelScreen },
+  UserProfileScreen: { screen: UserProfileScreen }
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'LoginScreen',
   navigationOptions: {
     headerStyle: styles.header
   }

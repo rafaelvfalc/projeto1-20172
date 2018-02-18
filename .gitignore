@@ -58,3 +58,5 @@ api/.yarn-integrity
 api/.env
 
 api/config.js
+
+client/ios/Pods

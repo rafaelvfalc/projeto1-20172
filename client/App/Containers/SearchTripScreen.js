@@ -18,15 +18,15 @@
     StackNavigator,
   } from 'react-navigation'
 
-  import styles from './Styles/SearchTravelScreenStyles'
+  import styles from './Styles/SearchTripScreenStyles'
 
-  import TripScreen from './TripScreen'
+  import SearchedTripsScreen from './SearchedTripsScreen'
 
   const SearchScreen = StackNavigator({
-    TripScreen: { screen: TripScreen }
+    SearchedTripsScreen: { screen: SearchedTripsScreen }
   });
 
-  export default class SearchTravelScreen extends Component {
+  export default class SearchTripScreen extends Component {
     constructor(props) {
       super(props)
       var _from = "";
@@ -43,7 +43,7 @@
       return (
         <View style={styles.container}>
         <Text style={styles.toptitle}>
-        Searching a Travel!
+        Searching Trip
         </Text>
         <TextInput
         style={styles.input}
@@ -117,9 +117,17 @@
 
         <Button
         style={{marginTop: 20,}}
-        title="Show Travels"
+        title="Search Trip"
         onPress={() =>
-          navigate('TripScreen',{ _from: this._from, _to: this._to, _depart: this.state.depart.date, _return: this.state.return.date })
+          navigate('SearchedTripsScreen',{ _from: this._from, _to: this._to, _depart: this.state.depart.date, _return: this.state.return.date })
+       }
+       />
+
+        <Button
+        style={{marginTop: 20,}}
+        title="Back to Main Menu"
+        onPress={() =>
+          navigate('ProtectedScreen',{})
        }
        />
 

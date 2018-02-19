@@ -34,10 +34,6 @@
       this.state = {depart:{date: "2017-12-01"}, return: {date: "2017-12-02"}};
     }
 
-    _searchTravel = () => {
-      alert(this.state.return.date)
-    }
-
     render() {
       const { navigate } = this.props.navigation;
       return (

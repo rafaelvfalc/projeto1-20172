@@ -71,20 +71,19 @@ export default class SearchedTripsScreen extends Component {
     if (this.state.waiting) {
       return <ActivityIndicator />;
     } else {
-     return <Text>~</Text>;
+     return <Text></Text>;
    }
  }
 
  render() {
   const { navigation } = this.props;
-  //'rgb(45,156,219)'
   return (
   <View style={styles.container}>
   <Text style={styles.toptitle}>Search Results</Text>
   <Timeline
   style={styles.list}
   onEventPress={() =>
-    navigation.navigate('TripScreen',{})
+    navigation.navigate('TripScreen',{_from: this.from, _to: this.to, _depart: this.depart, _return: this.return})
   }
   data={this.state.data}
   circleSize={20}

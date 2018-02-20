@@ -10,15 +10,27 @@ import {
   StackNavigator,
 } from 'react-navigation'
 
+import SearchedTripsScreen from './SearchedTripsScreen'
 import styles from './Styles/TripScreenStyles'
 
+type Props = {
+  navigation: Object,
+}
+
 export default class TripScreen extends Component {
+  props: Props;
   constructor(props) {
     super(props)
+
+    this.from = this.props.navigation.state.params._from;
+    this.to = this.props.navigation.state.params._to;
+    this.depart = this.props.navigation.state.params._depart;
+
     this.state = {};
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <View style={{padding: 10}}>
         <Text style={styles.toptitle}>Trip Info</Text>
@@ -46,9 +58,9 @@ export default class TripScreen extends Component {
         />
         <Button
         style={{marginTop: 20,}}
-        title="Backto search trip screen"
+        title="Back to search trip screen"
         onPress={() =>
-        alert("Back")
+          navigation.navigate('SearchedTripsScreen',{_from: this.from, _to: this.to, _depart: this.depart})
         }
         />
       </View>

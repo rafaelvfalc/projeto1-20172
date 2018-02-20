@@ -17,7 +17,6 @@ export default class SearchedTripsScreen extends Component {
     this.from = this.props.navigation.state.params._from;
     this.to = this.props.navigation.state.params._to;
     this.depart = this.props.navigation.state.params._depart;
-    this.return = this.props.navigation.state.params._return;
 
     this.data = []
 
@@ -34,13 +33,12 @@ export default class SearchedTripsScreen extends Component {
   }
 
   fetchData(){
-    fetch("https://my.api.mockaroo.com/travel.json?key=8ee6d780")
+    fetch("https://my.api.mockaroo.com/travel_20-02.json?key=8ee6d780")
     .then((response) => response.json())
     .then((responseData) => {
       var from = this.from
       var to = this.to
       var depart_date = this.depart
-      var return_date = this.return
       var trips = []
       responseData.forEach(function(trip) { 
        if (trip.origem == from && trip.destino == to && trip.dia == depart_date) {
@@ -71,20 +69,19 @@ export default class SearchedTripsScreen extends Component {
     if (this.state.waiting) {
       return <ActivityIndicator />;
     } else {
-     return <Text>~</Text>;
+     return <Text></Text>;
    }
  }
 
  render() {
   const { navigation } = this.props;
-  //'rgb(45,156,219)'
   return (
   <View style={styles.container}>
   <Text style={styles.toptitle}>Search Results</Text>
   <Timeline
   style={styles.list}
   onEventPress={() =>
-    navigation.navigate('TripScreen',{})
+    navigation.navigate('TripScreen',{_from: this.from, _to: this.to, _depart: this.depart})
   }
   data={this.state.data}
   circleSize={20}

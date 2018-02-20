@@ -25,7 +25,6 @@ export default class TripScreen extends Component {
     this.from = this.props.navigation.state.params._from;
     this.to = this.props.navigation.state.params._to;
     this.depart = this.props.navigation.state.params._depart;
-    this.return = this.props.navigation.state.params._return;
 
     this.state = {};
   }
@@ -61,7 +60,7 @@ export default class TripScreen extends Component {
         style={{marginTop: 20,}}
         title="Back to search trip screen"
         onPress={() =>
-          navigation.navigate('SearchedTripsScreen',{_from: this.from, _to: this.to, _depart: this.depart, _return: this.return})
+          navigation.navigate('SearchedTripsScreen',{_from: this.from, _to: this.to, _depart: this.depart})
         }
         />
       </View>

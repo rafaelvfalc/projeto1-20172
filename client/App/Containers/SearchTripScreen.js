@@ -31,7 +31,9 @@
       super(props)
       var _from = "";
       var _to = "";
-      this.state = {depart:{date: "2017-12-01"}, return: {date: "2017-12-02"}};
+
+      var utc_date = new Date().toJSON().slice(0,10);
+      this.state = {depart:{date: utc_date}};
     }
 
     render() {
@@ -62,10 +64,10 @@
         mode="date"
         placeholder="Select date"
         format="YYYY-MM-DD"
-        minDate="2016-05-01"
+        minDate="2017-01-01"
         maxDate="2018-12-31"
-        confirmBtnText="OK"
-        cancelBtnText="CANCEL"
+        confirmBtnText="Ok"
+        cancelBtnText="Cancel"
         customStyles={{
           dateIcon: {
             position: 'absolute',
@@ -80,42 +82,13 @@
         onDateChange={(date) => {this.setState({depart:{date: date}})}}
         />
         </View>
-        <View>
-        <Text style={{fontSize:15, marginLeft:15, marginTop:10, marginBottom: 10}}>
-        Return:
-        </Text>
-        <DatePicker
-        style={{width: 150, marginLeft:15}}
-        date={this.state.return.date}
-        mode="date"
-        placeholder="Select date"
-        format="YYYY-MM-DD"
-        minDate="2016-05-01"
-        maxDate="2018-12-31"
-        confirmBtnText="OK"
-        cancelBtnText="CANCEL"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-        }}
-        onDateChange={(date) => {this.setState({return:{date: date}})}}
-        />
-        </View>
-
         </View>
 
         <Button
         style={{marginTop: 20,}}
         title="Search Trip"
         onPress={() =>
-          navigate('SearchedTripsScreen',{ _from: this._from, _to: this._to, _depart: this.state.depart.date, _return: this.state.return.date })
+          navigate('SearchedTripsScreen',{ _from: this._from, _to: this._to, _depart: this.state.depart.date})
        }
        />
 

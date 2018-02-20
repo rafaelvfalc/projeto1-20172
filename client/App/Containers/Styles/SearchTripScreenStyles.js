@@ -50,14 +50,5 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     backgroundColor: '#1e698d'
-  },
-  autocomplete: {
-    alignSelf: "stretch",
-    height: 50,
-    margin: 10,
-    marginTop: 50,
-    backgroundColor: "#FFF",
-    borderColor: "lightblue",
-    borderWidth: 1
   }
 })
